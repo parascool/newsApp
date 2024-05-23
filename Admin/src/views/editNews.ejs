@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit News</title>
+</head>
+<body>
+  <h1>Edit News</h1>
+  <form action="/news/edit/<%= news._id %>" method="post">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" value="<%= news.title %>" required>
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" required><%= news.content %></textarea>
+    <label for="category">Category:</label>
+    <input type="text" id="category" name="category" value="<%= news.category %>" required>
+    <button type="submit">Edit News</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,41 @@
+version: '3'
+services:
+  admin-app:
+    build:
+      context: ./Admin
+    container_name: admin-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+
+  customer-app:
+    build:
+      context: ./Customer
+    container_name: customer-app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - admin-app
+      - customer-app
+
+volumes:
+  mongo-data:
